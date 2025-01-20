@@ -1,0 +1,11 @@
+* AkeirFX Base Library *
+
+This is a library to be used on screen creations
+
+* How can I use it? *
+
+Add the distro jar to your java project and access/extend the classes
+
+* Easy and Simple! Help to Spread the Word! :) *
+
+Isaac Alencar.
