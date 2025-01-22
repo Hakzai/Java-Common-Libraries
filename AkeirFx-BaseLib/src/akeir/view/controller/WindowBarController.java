@@ -10,18 +10,14 @@ import akeir.view.screen.AboutScreen;
 import akeir.view.screen.MainScreen;
 import javafx.event.Event;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class WindowBarController extends ControllerBase {
 
     private double x, y;
-    private ContextMenu contextMenu;
 
     private WindowBarController() { }
 
@@ -47,7 +43,7 @@ public class WindowBarController extends ControllerBase {
         }
     }
 
-    public void closeActionFromContextMenu(Event event)
+    protected void closeActionFromContextMenu(Event event)
     {
         ((Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow()).close();
 
@@ -70,17 +66,10 @@ public class WindowBarController extends ControllerBase {
         stage.setY(event.getScreenY() - y);
     }
 
-    public void barMouseClickAction(MouseEvent event)
+    @Override
+    protected void createContextMenu()
     {
-        if(event.getButton() == MouseButton.SECONDARY);
-        {
-            barMouseRightClickAction(event);
-        }
-    }
-
-    private void createContextMenu(Event event)
-    {
-        contextMenu = new ContextMenu();
+        super.createContextMenu();
 
         MenuItem aboutItem = new MenuItem("About");
         aboutItem.setOnAction(e -> aboutAction(e));
@@ -95,27 +84,8 @@ public class WindowBarController extends ControllerBase {
         MenuItem closeItem = new MenuItem("Close");
         closeItem.setOnAction(e -> closeAction(e));
         contextMenu.getItems().add(closeItem);
-
     }
-
-    private void barMouseRightClickAction(MouseEvent event)
-    {
-        if(null == contextMenu)
-        {
-            createContextMenu(event);
-        }
-
-        Scene contextScene = ((Node) event.getSource()).getScene();
-        contextScene.setOnMouseClicked(e -> {
-            // inner handler to show/hide menu
-            if (event.getButton() == MouseButton.SECONDARY) {
-                contextMenu.show(contextScene.getWindow(), event.getScreenX(), event.getScreenY());
-            } else {
-                contextMenu.hide();
-            }
-        });
-    }
-
+    
     public void minimizeAction(Event event)
     {
         ((Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow()).setIconified(true);

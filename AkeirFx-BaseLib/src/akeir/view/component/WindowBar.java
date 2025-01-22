@@ -57,7 +57,7 @@ public class WindowBar extends SceneBase {
         this.getBtnClose().setOnAction(e -> controller.closeAction(e));
         this.setOnMousePressed(e -> controller.barMousePressedAction(e));
         this.setOnMouseDragged(e -> controller.barMouseDraggedAction(e));
-        this.setOnMouseClicked(e -> controller.barMouseClickAction(e));
+        this.setOnMouseClicked(e -> controller.mouseClickAction(e));
     }
 
     public Button getBtnClose()

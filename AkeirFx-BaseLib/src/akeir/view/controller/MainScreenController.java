@@ -13,7 +13,7 @@ public class MainScreenController extends ControllerBase {
 
     private static MainScreen mainScreenRef;
 
-    private MainScreenController() { }
+    protected MainScreenController() { }
 
     public static MainScreenController createInstance(AnchorPane screen)
     {
